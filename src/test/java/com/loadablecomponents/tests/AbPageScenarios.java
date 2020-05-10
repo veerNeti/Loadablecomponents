@@ -33,6 +33,7 @@ public class AbPageScenarios extends BaseTest {
 
     @Test
     public void testParagraph() {
-        assertTrue(abtestPage.readParagraph( ).equalsIgnoreCase( expectedParagraph));
+        assertTrue(abtestPage.readParagraph( ).equalsIgnoreCase(expectedParagraph));
     }
+
 }

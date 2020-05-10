@@ -9,6 +9,7 @@
             <class name="com.loadablecomponents.tests.AbPageScenarios"/>
             <class name="com.loadablecomponents.tests.DropDownScenarios"/>
             <class name="com.loadablecomponents.tests.LoginScenarios"/>
+            <class name="com.loadablecomponents.tests.BasicAuthScenario"/>
             <class name="com.webdriversample.FooTest"/>
         </classes>
     </test>

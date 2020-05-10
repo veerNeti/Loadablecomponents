@@ -29,5 +29,9 @@ There is currently an implementation in Java that ships as part of Selenium 2, b
 
 #lowLoadableComponent and NoSuchElementException
  
+ #Windows based basic authentication
+ -Robot class is used to generate native system input events for the purposes of test automation, 
+ *self-running dems, and other applications where control of the mouse and keyboard is needed. 
+*The primary purpose of Robot is to facilitate automated testing of Java platform implementations.
 
  

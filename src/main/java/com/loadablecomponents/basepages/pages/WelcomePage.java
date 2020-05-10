@@ -5,8 +5,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.LoadableComponent;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import static org.testng.AssertJUnit.assertTrue;
@@ -20,6 +22,8 @@ import static org.testng.AssertJUnit.assertTrue;
 
 
 public class WelcomePage extends LoadableComponent<WelcomePage> {
+    //Driver and Webdriver
+    private final WebDriver driver;
     //*********Page Variables*********
     private String welcomepageUrl;
     private By formAuthenticationLinkLocator = By.linkText("Form Authentication");
@@ -29,18 +33,16 @@ public class WelcomePage extends LoadableComponent<WelcomePage> {
     private By optionDropDown = By.linkText("Dropdown");
     private By abtestele = By.linkText("A/B Testing");
     private By addremoveElements = By.linkText("Add/Remove Elements");
-
-    //Driver and Webdriver
-    private final WebDriver driver;
+    private By basicAuth = By.linkText("Basic Auth");
     private Logger logger;
 
     //driver passed in from test will instatiate the driver
     private BasePage basePage;
 
-    public WelcomePage(WebDriver driver, Logger logger,String aut) {
+    public WelcomePage(WebDriver driver, Logger logger, String aut) {
         this.driver = driver;
         this.logger = logger;
-        this.welcomepageUrl=aut;
+        this.welcomepageUrl = aut;
         this.basePage = new BasePage(this.driver, this.logger);
     }
 
@@ -70,7 +72,7 @@ public class WelcomePage extends LoadableComponent<WelcomePage> {
 
     public DropDownPage getDropDownPage() {
         this.driver.findElement(optionDropDown).click( );
-        return new DropDownPage(driver,this.logger, this);
+        return new DropDownPage(driver, this.logger, this);
     }
 
 
@@ -81,14 +83,56 @@ public class WelcomePage extends LoadableComponent<WelcomePage> {
 
     public AbtestPage getAbTestPage() {
         this.driver.findElement(abtestele).click( );
-        return new AbtestPage(driver,this.logger, this);
+        return new AbtestPage(driver, this.logger, this);
     }
 
     public AddremoveElementsPage addremoveElementsPage() {
-        this.basePage.click(abtestele);
-        return new AddremoveElementsPage(driver,this.logger, this);
+        this.basePage.click(addremoveElements);
+        return new AddremoveElementsPage(driver, this.logger, this);
     }
 
+    public BasicAuthPage loginToBasicAuthPage(String user, String pass) {
+        this.basePage.click(basicAuth);
+        // create robot for keyboard operations
+        Robot rb = null;
+        try {
+            rb = new Robot( );
+        } catch (AWTException e) {
+            e.printStackTrace( );
+        }
+
+// Enter user name in username field
+        StringSelection username = new StringSelection("admin");
+        Toolkit.getDefaultToolkit( ).getSystemClipboard( ).setContents(username, null);
+        rb.keyPress(KeyEvent.VK_CONTROL);
+        rb.keyPress(KeyEvent.VK_V);
+        rb.keyRelease(KeyEvent.VK_V);
+        rb.keyRelease(KeyEvent.VK_CONTROL);
+
+// press tab to move to password field
+        rb.keyPress(KeyEvent.VK_TAB);
+        rb.keyRelease(KeyEvent.VK_TAB);
+
+//Enter password in password fieldadmin
+        StringSelection pwd = new StringSelection("admin");
+        Toolkit.getDefaultToolkit( ).getSystemClipboard( ).setContents(pwd, null);
+        rb.keyPress(KeyEvent.VK_CONTROL);
+        rb.keyPress(KeyEvent.VK_V);
+        rb.keyRelease(KeyEvent.VK_V);
+        rb.keyRelease(KeyEvent.VK_CONTROL);
+
+        // press tab to move to sigin field
+        rb.keyPress(KeyEvent.VK_TAB);
+        rb.keyRelease(KeyEvent.VK_TAB);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace( );
+        }
+        rb.keyPress(KeyEvent.VK_ENTER);
+        return new BasicAuthPage(driver, logger, this);
+    }
 
 
 }

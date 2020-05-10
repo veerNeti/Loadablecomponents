@@ -31,13 +31,20 @@ title is
 element staleness
 visible text*/
 
-    ExpectedCondition<WebElement> forEle(By by) {
-        return ExpectedConditions.visibilityOfElementLocated(by);
+    public WebElement elementRefreshed(By by) {
+        return webDriverWait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfElementLocated(by)));
     }
 
-    public WebElement isElementLocated(By by) {
-        return webDriverWait.until(forEle(by));
+    public Boolean isInvisiblility(By by) {
+        return webDriverWait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
+    public WebElement isInDOM(By by) {
+        return webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    public WebElement isVisible(By by) {
+        return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
 
 }
