@@ -1,8 +1,6 @@
 package com.loadablecomponents.driverhookup;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -16,15 +14,9 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.

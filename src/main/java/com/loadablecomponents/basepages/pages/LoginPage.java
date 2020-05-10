@@ -1,11 +1,11 @@
-package com.loadablecomponents.basepages;
+package com.loadablecomponents.basepages.pages;
 
+import com.loadablecomponents.basepages.BasePage;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.LoadableComponent;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.testng.Assert.assertTrue;
 
@@ -18,12 +18,11 @@ import static org.testng.Assert.assertTrue;
 public class LoginPage extends LoadableComponent<LoginPage> {
     LoadableComponent<WelcomePage> parentPage;
     //*********Page Variables*********
-    private WebDriverWait webDriverWait;
     private WebDriver driver;
     private BasePage basePage;
     private Logger logger;
     //*********Web Elements*********
-    private By headerText = By.tagName("h2");
+    private By headerEle = By.tagName("h2");
     private By formFieldUserName = By.cssSelector("input#username");
     private By formFieldPassword = By.cssSelector("input#password");
     private By logInButton = By.cssSelector("button.radius");
@@ -32,7 +31,7 @@ public class LoginPage extends LoadableComponent<LoginPage> {
     public LoginPage(WebDriver driver, LoadableComponent<WelcomePage> welcomePageLoadableComponent,Logger logger) {
         this.driver = driver;
         this.logger=logger;
-        this.webDriverWait = new WebDriverWait(driver, 10L);
+//        this.webDriverWait = new WebDriverWait(driver, 10L);
         this.basePage = new BasePage(this.driver, this.logger);
         this.parentPage = welcomePageLoadableComponent;
     }
@@ -71,6 +70,10 @@ public class LoginPage extends LoadableComponent<LoginPage> {
         this.basePage.writeText( formFieldUserName,username);
         this.basePage.writeText(formFieldPassword,password);
         this.basePage.click(logInButton);
+    }
+
+    public String pageHeaderText(){
+        return this.basePage.readText(headerEle);
     }
 
 

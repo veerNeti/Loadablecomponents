@@ -4,7 +4,7 @@
 
     <test verbose="5" preserve-order="true" name="the Internet" parallel="false">
         <classes>
-            <class name="com.loadablecomponents.tests.LoginTest"/>
+            <class name="com.loadablecomponents.tests.LoginScenarios"/>
         </classes>
     </test>
 

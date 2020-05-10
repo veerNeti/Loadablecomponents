@@ -1,13 +1,16 @@
 package com.loadablecomponents.driverhookup;
 
+import com.loadablecomponents.basepages.pages.WelcomePage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.ITestContext;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -22,10 +25,10 @@ public abstract class BaseTest {
     protected final long MAX_TIMEOUT = 20l;
     protected Logger logger;
     protected WebDriver driver = null;
-
-    @Parameters({"browser", "environment"})
+    private WelcomePage welcomePage;
+    @Parameters({"aut","browser", "environment"})
     @BeforeClass(alwaysRun = true)
-    public void setUp(@Optional("chrome") String browser, ITestContext ctx, @Optional("local") String environment) {
+    public void setUp(@Optional("https://the-internet.herokuapp.com") String aut,@Optional("chrome") String browser, ITestContext ctx, @Optional("local") String environment) {
         if (Objects.isNull(this.driver)) {
             String testName = ctx.getCurrentXmlTest( ).getName( );
             logger = LogManager.getLogger(testName);
@@ -41,6 +44,7 @@ public abstract class BaseTest {
         } else {
             logger.throwing(Level.FATAL, new NullPointerException( ));
         }
+
         setCurrentThreadName( );
     }
 
