@@ -26,9 +26,10 @@ public abstract class BaseTest {
     protected Logger logger;
     protected WebDriver driver = null;
     private WelcomePage welcomePage;
-    @Parameters({"aut","browser", "environment"})
+
+    @Parameters({"aut", "browser", "environment"})
     @BeforeClass(alwaysRun = true)
-    public void setUp(@Optional("https://the-internet.herokuapp.com") String aut,@Optional("chrome") String browser, ITestContext ctx, @Optional("local") String environment) {
+    public void setUp(@Optional("https://the-internet.herokuapp.com") String aut, @Optional("chrome") String browser, ITestContext ctx, @Optional("local") String environment) {
         if (Objects.isNull(this.driver)) {
             String testName = ctx.getCurrentXmlTest( ).getName( );
             logger = LogManager.getLogger(testName);
