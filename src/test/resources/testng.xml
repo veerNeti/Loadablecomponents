@@ -4,7 +4,7 @@
     <listeners>
         <listener class-name="com.loadablecomponents.listerners.TestListener"/>
     </listeners>
-    <test verbose="2" preserve-order="true" name="Loadablecomponents">
+    <test verbose="5" preserve-order="true" name="Loadablecomponents">
         <classes>
             <class name="com.loadablecomponents.tests.AbPageScenarios"/>
             <class name="com.loadablecomponents.tests.DropDownScenarios"/>

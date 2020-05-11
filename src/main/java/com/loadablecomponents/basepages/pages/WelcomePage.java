@@ -27,13 +27,17 @@ public class WelcomePage extends LoadableComponent<WelcomePage> {
     //*********Page Variables*********
     private String welcomepageUrl;
     private By formAuthenticationLinkLocator = By.linkText("Form Authentication");
-    private By header = By.xpath("//h1[@class='heading']");
-    private By subheader = By.tagName("h2");
-    private By allAvilableOptions = By.cssSelector("ul>li>a");
-    private By optionDropDown = By.linkText("Dropdown");
-    private By abtestele = By.linkText("A/B Testing");
-    private By addremoveElements = By.linkText("Add/Remove Elements");
-    private By basicAuth = By.linkText("Basic Auth");
+    private By headerLocator = By.xpath("//h1[@class='heading']");
+    private By subheaderLocator = By.tagName("h2");
+    private By allAvilableOptionsLocator = By.cssSelector("ul>li>a");
+    private By optionDropDownLocator = By.linkText("Dropdown");
+    private By abtestLocator = By.linkText("A/B Testing");
+    private By addremoveLocator = By.linkText("Add/Remove Elements");
+    private By basicAuthLocator = By.linkText("Basic Auth");
+    private By checkboxLocator = By.linkText("Checkboxes");
+    private By contextMenuLocator = By.linkText("Context Menu");
+
+
     private Logger logger;
 
     //driver passed in from test will instatiate the driver
@@ -66,12 +70,12 @@ public class WelcomePage extends LoadableComponent<WelcomePage> {
 
     public List<String> listAllOptionsInWelcomePage() {
 
-        return this.basePage.getAllDropDownOptions(optionDropDown);
+        return this.basePage.getAllDropDownOptions(optionDropDownLocator);
     }
 
 
     public DropDownPage getDropDownPage() {
-        this.driver.findElement(optionDropDown).click( );
+        this.driver.findElement(optionDropDownLocator).click( );
         return new DropDownPage(driver, this.logger, this);
     }
 
@@ -82,17 +86,17 @@ public class WelcomePage extends LoadableComponent<WelcomePage> {
     }
 
     public AbtestPage getAbTestPage() {
-        this.driver.findElement(abtestele).click( );
+        this.driver.findElement(abtestLocator).click( );
         return new AbtestPage(driver, this.logger, this);
     }
 
     public AddremoveElementsPage addremoveElementsPage() {
-        this.basePage.click(addremoveElements);
+        this.basePage.click(addremoveLocator);
         return new AddremoveElementsPage(driver, this.logger, this);
     }
 
     public BasicAuthPage loginToBasicAuthPage(String user, String pass) {
-        this.basePage.click(basicAuth);
+        this.basePage.click(basicAuthLocator);
         // create robot for keyboard operations
         Robot rb = null;
         try {
@@ -134,6 +138,15 @@ public class WelcomePage extends LoadableComponent<WelcomePage> {
         return new BasicAuthPage(driver, logger, this);
     }
 
+    public Checkboxes getCheckboxesPage() {
+        this.basePage.click(checkboxLocator);
+        return new Checkboxes(driver, logger, this);
+    }
+
+    public ContextMenuPage getContextMenyPage(){
+        this.basePage.click(contextMenuLocator);
+        return new ContextMenuPage(driver,logger,this);
+    }
 
 }
 
